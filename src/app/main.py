@@ -1,6 +1,6 @@
 from fastapi import FastAPI, HTTPException
 
-from models import ItemPayload
+from src.models.models import ItemPayload
 
 app = FastAPI()
 
