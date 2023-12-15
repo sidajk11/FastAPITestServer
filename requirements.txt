@@ -3,5 +3,7 @@ redis
 types-redis
 uvicorn
 sqlmodel
-pytest
 httpx
+pytest
+pytest-cov
+pytest-dependency
