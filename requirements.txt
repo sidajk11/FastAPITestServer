@@ -3,7 +3,6 @@ redis
 types-redis
 uvicorn
 sqlmodel
-httpx
 pytest
-pytest-cov
-pytest-dependency
+httpx
+icecream

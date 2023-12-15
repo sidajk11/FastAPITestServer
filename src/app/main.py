@@ -1,5 +1,7 @@
 from typing import List, Optional
 
+from icecream import ic
+
 import pytest
 
 from fastapi.testclient import TestClient
@@ -14,10 +16,12 @@ from src.database.sqlmodelsample import Hero, HeroCreate, HeroRead, HeroUpdate, 
 
 from sqlmodel import Field, Relationship, Session, SQLModel, create_engine, select
 
+ic.configureOutput(includeContext=True)
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     # Create DataBase
+    ic('Create DataBase')
     yield
     create_db_and_tables()
 
