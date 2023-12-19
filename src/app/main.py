@@ -10,7 +10,7 @@ from fastapi import Depends, FastAPI, HTTPException, Query
 
 from contextlib import asynccontextmanager
 
-from src.app.models import ItemPayload
+from src.app.models import ItemPayload, ItemTestModel
 
 from src.database.sqlmodelsample import Hero, HeroCreate, HeroRead, HeroUpdate, Team, TeamRead, TeamCreate, TeamUpdate, get_session, create_db_and_tables
 
@@ -47,7 +47,7 @@ async def test():
 
 # Route to add a item
 @app.post("/items/{item_name}/{quantity}")
-def add_item(item_name: str, quantity: int):
+def add_item(item_name: str, quantity: int, test: str, itemInput: ItemTestModel):
     if quantity <= 0:
         raise HTTPException(status_code=400, detail="Quantity must be greater than 0.")
     # if item already exists, we'll just add the quantity.
@@ -57,12 +57,15 @@ def add_item(item_name: str, quantity: int):
         # get index of item_name in item_ids, which is the item_id
         item_id = items_ids[item_name]
         grocery_list[item_id].quantity += quantity
+        grocery_list[item_id].test = test
+        grocery_list[item_id].keyword = itemInput.keyword
 # otherwise, create a new item
     else:
         # generate an ID for the item based on the highest ID in the grocery_list
         item_id = max(grocery_list.keys()) + 1 if grocery_list else 0
         grocery_list[item_id] = ItemPayload(
-            item_id=item_id, item_name=item_name, quantity=quantity
+            item_id = item_id, item_name = item_name, quantity = quantity, 
+            test = test, keyword = itemInput.keyword, nothing="nothing", num=3
         )
 
     return {"item": grocery_list[item_id]}
