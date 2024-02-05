@@ -2,3 +2,5 @@ src/app/__pycache__
 src/database/__pycache__
 venv
 src/.DS_Store
+src/app/.DS_Store
+.DS_Store
